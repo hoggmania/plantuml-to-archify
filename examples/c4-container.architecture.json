@@ -1,0 +1,108 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "Checkout Platform",
+    "quality_profile": "standard"
+  },
+  "layout": {
+    "mode": "grid",
+    "origin": [
+      60,
+      110
+    ],
+    "cols": 6,
+    "gapX": 55,
+    "gapY": 45,
+    "cellW": 180,
+    "cellH": 84
+  },
+  "components": [
+    {
+      "id": "customer",
+      "type": "external",
+      "label": "Customer",
+      "col": 0,
+      "row": 0
+    },
+    {
+      "id": "payments",
+      "type": "external",
+      "label": "Payment Provider",
+      "col": 5,
+      "row": 0
+    },
+    {
+      "id": "web",
+      "type": "frontend",
+      "label": "Web App",
+      "col": 1,
+      "row": 0
+    },
+    {
+      "id": "api",
+      "type": "backend",
+      "label": "Checkout API",
+      "col": 2,
+      "row": 0
+    },
+    {
+      "id": "events",
+      "type": "messagebus",
+      "label": "Order Events",
+      "col": 3,
+      "row": 0
+    },
+    {
+      "id": "db",
+      "type": "database",
+      "label": "Orders",
+      "col": 4,
+      "row": 0
+    }
+  ],
+  "boundaries": [
+    {
+      "kind": "region",
+      "label": "Checkout Platform",
+      "wraps": [
+        "web",
+        "api",
+        "events",
+        "db"
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": "customer-to-web",
+      "from": "customer",
+      "to": "web",
+      "label": "Uses"
+    },
+    {
+      "id": "web-to-api",
+      "from": "web",
+      "to": "api",
+      "label": "Calls"
+    },
+    {
+      "id": "api-to-events",
+      "from": "api",
+      "to": "events",
+      "label": "Publishes"
+    },
+    {
+      "id": "events-to-db",
+      "from": "events",
+      "to": "db",
+      "label": "Persists"
+    },
+    {
+      "id": "db-to-payments",
+      "from": "db",
+      "to": "payments",
+      "label": "Triggers"
+    }
+  ]
+}

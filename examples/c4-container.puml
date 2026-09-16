@@ -1,0 +1,17 @@
+@startuml Checkout
+!include <C4/C4_Container>
+title Checkout Platform
+Person(customer, "Customer")
+System_Ext(payments, "Payment Provider")
+System_Boundary(platform, "Checkout Platform") {
+  Container(web, "Web App", "", "")
+  Container(api, "Checkout API", "", "")
+  ContainerQueue(events, "Order Events", "", "")
+  ContainerDb(db, "Orders", "", "")
+}
+Rel(customer, web, "Uses")
+Rel(web, api, "Calls")
+Rel(api, events, "Publishes")
+Rel(events, db, "Persists")
+Rel(db, payments, "Triggers")
+@enduml

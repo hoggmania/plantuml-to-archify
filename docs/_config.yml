@@ -1,0 +1,3 @@
+title: PlantUML to Archify
+description: Transpile PlantUML architecture diagrams into Archify JSON.
+theme: jekyll-theme-primer
